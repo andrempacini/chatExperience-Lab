@@ -1,13 +1,13 @@
 using System;
 using Dapper.Contrib.Extensions;
 
-namespace MyApplication {
-    [Table("usuarios")]
+namespace Model {
+    [Table("users")]
     class User {
 
         [Key]
         public int id {get; set;}
-        public string user {get; set;}
+        public string username {get; set;}
         public string password {get; set;}
     }
 }
