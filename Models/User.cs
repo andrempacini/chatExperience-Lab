@@ -1,9 +1,9 @@
 using System;
 using Dapper.Contrib.Extensions;
 
-namespace Model {
+namespace Models {
     [Table("users")]
-    class User {
+    public class User {
 
         [Key]
         public int id {get; set;}

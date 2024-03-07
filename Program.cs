@@ -2,7 +2,7 @@
 using Dapper;
 using Dapper.Contrib;
 using Dapper.Contrib.Extensions;
-using Model;
+using Models;
 using MySqlConnector;
 using Controllers;
 
@@ -29,21 +29,12 @@ class Program {
                 switch(userOptionChoosed) {
                     //get a single user or all users from the system
                     case "3":
-                        Console.WriteLine("Type an user ID to search or '0' to bring a list with all users: ");
-                        var userId = Console.ReadLine();
-                        if (!userId.Contains('0')) {
-                        var users = connection.Query<string>("SELECT username FROM users WHERE id = @userId", new { userId });
-                        var user = connection.Get<User>(userId);
-                        Console.WriteLine("Hello: " + user.username + " your password is: " + user.password );
-                        } else {
-                            var queryAllUsers = "SELECT * FROM users";
-                            var getAllUsers = connection.Query(queryAllUsers);
+                        Console.WriteLine("These are all your users: ");
+                        var users = userController.GetAllUsers();
 
-                            Console.WriteLine("Those are all your users: ");
-                            foreach(var user in getAllUsers) {
-                                Console.WriteLine(user.username);
-                            }
-                        };
+                        foreach(var u in users) {
+                            Console.WriteLine($"{u.username}");
+                        }
                         break;
                     
                     //create a new user
@@ -61,8 +52,18 @@ class Program {
                         leaveProgram = true;
                         break;
 
+                    //Get a single user
+                    case "5":
+                        Console.WriteLine("Type an user ID: ");
+                        var user = userController.GetUserById();
+
+                        foreach(var u in user) {
+                            Console.WriteLine($"{u.username}");
+                        }
+                        break;
+
                 }
-                Console.WriteLine("Finished service. Type anything if you want to do keep on chating");
+                Console.WriteLine("\nFinished service. Type anything if you want to do keep on chating");
 
             }
 
