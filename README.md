@@ -1,2 +1,2 @@
 # chatExperience-Lab
-A page where user can sign in /sign up and then chat with another user. This is a lab to learn coding foundation
+A learning lab of a console app to understand how c# basics works
